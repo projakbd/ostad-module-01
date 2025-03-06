@@ -1,0 +1,27 @@
+name: Read and Output hello.txt
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  read-hello:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Verify hello.txt exists
+        run: |
+          if [ -f hello.txt ]; then
+            echo "hello.txt exists."
+          else
+            echo "hello.txt does not exist."
+            exit 1
+          fi
+
+      - name: Read and output hello.txt
+        run: |
+          echo "Content of hello.txt:"
+          cat hello.txt
